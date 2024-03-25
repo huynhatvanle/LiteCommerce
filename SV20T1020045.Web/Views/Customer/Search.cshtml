@@ -31,7 +31,7 @@
                     <td>@item.Email</td>
                     <td>@item.Address</td>
                     <td>@item.Province</td>
-                    <td></td>
+                    <td>@(item.IsLocked ? "Tài khoản bị khóa" : "Tài khoản không bị khóa")</td>
                     <td class="text-right">
                         <a href="~/Customer/Edit/@item.CustomerID" class="btn btn-xs btn-info">
                             <i class="fa fa-edit"></i>

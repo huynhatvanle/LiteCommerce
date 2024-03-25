@@ -166,18 +166,6 @@ namespace SV20T1020045.Web.Controllers
         [HttpPost]
         public IActionResult SavePhoto(ProductPhoto data, IFormFile uploadPhoto )
         {
-            if (string.IsNullOrWhiteSpace(data.Photo))
-            {
-                ModelState.AddModelError("Photo", "Ảnh không được để trống");
-            }
-            if (string.IsNullOrWhiteSpace(data.Description))
-            {
-                ModelState.AddModelError("Description", "Mô tả không được để trống");
-            }
-            if (string.IsNullOrWhiteSpace(data.DisplayOrder.ToString()))
-            {
-                ModelState.AddModelError("DisplayOrder", "Thứ tự không được để trống");
-            }
             //Xử lý ảnh upload
             if (uploadPhoto != null)
             {
@@ -190,6 +178,18 @@ namespace SV20T1020045.Web.Controllers
                     uploadPhoto.CopyTo(stream);
                 }
                 data.Photo = filename;
+            }
+            if (string.IsNullOrWhiteSpace(data.Photo))
+            {
+                ModelState.AddModelError("Photo", "Ảnh không được để trống");
+            }
+            if (string.IsNullOrWhiteSpace(data.Description))
+            {
+                ModelState.AddModelError("Description", "Mô tả không được để trống");
+            }
+            if (string.IsNullOrWhiteSpace(data.DisplayOrder.ToString()))
+            {
+                ModelState.AddModelError("DisplayOrder", "Thứ tự không được để trống");
             }
             if (!ModelState.IsValid)
             {

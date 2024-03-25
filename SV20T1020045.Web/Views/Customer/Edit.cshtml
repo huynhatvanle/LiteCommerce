@@ -54,20 +54,13 @@
                 @Html.ValidationMessage(nameof(Model.Province),new { @style="color:#f00"})
             </div>
             <div class="form-group">
-                <label>Trạng thái:</label><br/>
-                <div class="checkbox" name="IsLocked"  >
-                    @if (Model.IsLocked)
-                    {
-                        <label><input type="checkbox" value="true" checked >Tài khoản bị khóa</label><br />
-                        <label><input type="checkbox" value="false" >Tài khoản không bị khóa</label>
-                    }
-                    else
-                    {
-                        <label><input type="checkbox" value="true" >Tài khoản bị khóa</label><br />
-                        <label><input type="checkbox" value="false" checked>Tài khoản không bị khóa</label>
-                    }
+                <label>Trạng thái:</label>
+                <div class="form-check">
+                    @Html.CheckBoxFor(m => m.IsLocked)
+                    <lable class="form-check-label">
+                        Tài khoản bị khóa
+                    </lable>
                 </div>
-            </div>
 
             <div class="form-group text-right">
                 <button type="submit" class="btn btn-primary">

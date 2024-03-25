@@ -55,20 +55,11 @@
 
             <div class="form-group">
                 <div class="col-lg-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        @if (Model.IsWorking)
-                        {
-                            <label>
-                                <input type="checkbox" name="IsWorking" value="true" checked /> Nhân viên đang làm việc
-                            </label>
-                        }
-                        else
-                        {
-                            <label>
-                                <input type="checkbox" name="IsWorking" value="false" checked /> Nhân viên không làm việc
-                            </label>
-                        }
-                        
+                    <div class="col-sm-10">
+                        @Html.CheckBoxFor(m => m.IsWorking)
+                        <label class="form-check-label">
+                            Nhân viên đang làm việc
+                        </label>
                     </div>
                 </div>
             </div>
