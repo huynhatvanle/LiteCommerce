@@ -148,13 +148,13 @@ namespace SV20T1020045.Web.Controllers
                         PhotoID = 0,
                         ProductID = id
                     };
-                    return View(model);
+                    break;
                 case "edit":
-                    model = ProductDataService.GetPhoto(photoId);
+                    ViewBag.Title = " Thay đổi ảnh";
+                    model = ProductDataService.GetPhoto( photoId);
                     if (model == null)
-                        return RedirectToAction("Index");
-
-                    return View(model);
+                        return RedirectToAction("Edit", new { id = id });
+                    break;
                 case "delete":
                     // Xóa ảnh (xóa trực tiếp, không cần confirm)
                     ProductDataService.DeletePhoto(photoId);
@@ -162,6 +162,7 @@ namespace SV20T1020045.Web.Controllers
                 default:
                     return RedirectToAction("Index");
             }
+            return View(model);
         }
         [HttpPost]
         public IActionResult SavePhoto(ProductPhoto data, IFormFile uploadPhoto )
@@ -197,16 +198,13 @@ namespace SV20T1020045.Web.Controllers
             }
             if (data.PhotoID == 0)
             {
-                ProductDataService.AddPhoto(data);
-                var product = ProductDataService.GetProduct(data.ProductID);
-                return View("Edit", product);
+                long id = ProductDataService.AddPhoto(data);
             }
             else
             {
-                ProductDataService.UpdatePhoto(data);
-                return RedirectToAction("Edit", new { productID = data.ProductID });
+                bool result = ProductDataService.UpdatePhoto(data);
             }
-           
+            return RedirectToAction("Edit", new { id = data.ProductID });
         }
 
         public IActionResult Attribute(int id, string method, int attributeId = 0)
