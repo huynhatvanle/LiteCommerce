@@ -275,7 +275,7 @@ namespace SV20T1020045.Web.Controllers
             {
                 shoppingCart.Add(data);
             }
-            else
+            else // Nếu mặt hàng đã có trong giỏ thì tăng số lượng và thay đổi giá bán
             {
                 existsProduct.Quantity += data.Quantity;
                 existsProduct.SalePrice += data.SalePrice;
@@ -294,6 +294,8 @@ namespace SV20T1020045.Web.Controllers
             int index = shoppingCart.FindIndex(m => m.ProductID == id); 
             if(index >=0)
                 shoppingCart.RemoveAt(index);
+            ApplicationContext.SetSessionData(SHOPPING_CART, shoppingCart);
+
             return Json("");
         }
         /// <summary>
