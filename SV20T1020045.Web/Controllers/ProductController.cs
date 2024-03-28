@@ -219,21 +219,21 @@ namespace SV20T1020045.Web.Controllers
                         AttributeID = 0,
                         ProductID = id
                     };
-                    return View(model);
+                    break;
                 case "edit":
                     ViewBag.Title = "Thay đổi thuộc tính mặt hàng";
                     model = ProductDataService.GetAttribute(attributeId);
                     if (model == null)
-                        return RedirectToAction("Index");
-
-                    return View(model);
+                        return RedirectToAction("Edit", new { id = id });
+                    break;
                 case "delete":
                     // Xóa thuộc tính (xóa trực tiếp, không cần confirm)
-                    ProductDataService.DeleteAttribute(Convert.ToInt64(attributeId));
+                    ProductDataService.DeleteAttribute(attributeId);
                     return RedirectToAction("Edit", new { id = id });
                 default:
                     return RedirectToAction("Index");
             }
+            return View(model);
         }
 
         [HttpPost]
@@ -261,15 +261,16 @@ namespace SV20T1020045.Web.Controllers
             if (data.AttributeID == 0)
             {
 
-                ProductDataService.AddAttribute(data);
+                /*ProductDataService.AddAttribute(data);
                 var product = ProductDataService.GetProduct(data.ProductID);
-                return View("Edit",product);
+                return View("Edit",product);*/
+                long id = ProductDataService.AddAttribute(data);
             }
             else
             {
-                ProductDataService.UpdateAttribute(data);
-                return RedirectToAction("Edit", new { productID = data.ProductID });
+                bool result = ProductDataService.UpdateAttribute(data);
             }
+            return RedirectToAction("Edit", new { id = data.ProductID });
         }
     }
 }

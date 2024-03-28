@@ -39,6 +39,7 @@
                         <li><a href="~/Order/Cancel/@Model.Order.OrderID" onclick="return confirm('Xác nhận hủy đơn hàng này?')">Hủy đơn hàng</a></li>
                     </ul>
                 </div>
+                <a href="~/Order/Delete/@Model.Order.OrderID" class="btn btn-sm btn-danger" onclick="return confirm('Có chắc chắn muốn xóa đơn hàng này không?')"><i class="fa fa-trash"></i> Xóa đơn hàng</a>
                 <a href="~/Order" class="btn btn-sm btn-info">Quay lại</a>
             }
             @if (Model.Order.Status == 3)
